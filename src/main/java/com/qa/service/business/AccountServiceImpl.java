@@ -26,6 +26,10 @@ public class AccountServiceImpl implements AccountService {
 		return repo.deleteClassroom(classroomID);
 	}
 	
+	public String deleteTrainee(Long traineeID) {
+		return repo.deleteTrainee(traineeID);
+	}
+	
 	public Account retrieveClassroom(Long classroomID) {
 		return repo.retrieveClassroom(classroomID);
 	}

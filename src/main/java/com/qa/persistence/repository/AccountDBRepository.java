@@ -53,9 +53,22 @@ public class AccountDBRepository implements AccountRepository {
 		return "{\"message\": \"account sucessfully deleted\"}";
 	}
 	
+	@Transactional(REQUIRED)
+	public String deleteTrainee(Long traineeID) {
+		Trainee traineeInDB = retrieveTrainee(traineeID);
+		if (traineeInDB != null) {
+			manager.remove(traineeInDB);
+		}
+		return "{\"message\": \"trainee sucessfully deleted\"}";
+	}
+	
 
 	public Account retrieveClassroom(Long classroomID) {
 		return manager.find(Account.class, classroomID);
+	}
+	
+	public Trainee retrieveTrainee(Long traineeID) {
+		return manager.find(Trainee.class, traineeID);
 	}
 	
 
@@ -65,7 +78,7 @@ public class AccountDBRepository implements AccountRepository {
 		Account accountold=retrieveClassroom(classroomID);
 		accountold.setClassroomID(account.getClassroomID());
 		accountold.setTrainer(account.getTrainer());
-		accountold.setTrainee(account.getTrainee());
+		//accountold.setTrainee(account.getTrainee());
 		return "{\"message\": \"account has been sucessfully updated\"}";
 	}
 
