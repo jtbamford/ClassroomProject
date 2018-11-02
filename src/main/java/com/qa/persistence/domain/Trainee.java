@@ -1,17 +1,21 @@
 package com.qa.persistence.domain;
 
-import javax.persistence.Embeddable;
+//import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-@Embeddable
+@Entity
 public class Trainee {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long traineeID;
 	private String traineeName;
+	private Long classroomID;
 	
 	public Trainee() {
 
@@ -35,6 +39,14 @@ public class Trainee {
 
 	public void setTraineeName(String traineeName) {
 		this.traineeName = traineeName;
+	}
+
+	public Long getClassroomID() {
+		return classroomID;
+	}
+
+	public void setClassroomID(Long classroomID) {
+		this.classroomID = classroomID;
 	}
 	
 }

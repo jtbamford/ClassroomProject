@@ -1,13 +1,17 @@
 package com.qa.persistence.domain;
 
-import com.qa.persistence.domain.Trainee;
+import java.util.List;
 
-import javax.persistence.Embedded;
+import javax.persistence.CascadeType;
+//import javax.persistence.Embedded;
+//import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Account {
@@ -16,8 +20,9 @@ public class Account {
 	@Id
 	private Long classroomID;
 	private String trainer;
-	@Embedded
-	private Trainee trainee;
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name="classroomID")
+	private List<Trainee> trainee;
 
 	public Account() {
 
@@ -25,7 +30,7 @@ public class Account {
 
 	public Account(String trainer, Trainee trainee) {
 		this.trainer= trainer;
-		this.trainee = trainee;
+		this.trainee = (List<Trainee>) trainee;
 	}
 	
 	public Long getClassroomID() {
@@ -45,11 +50,11 @@ public class Account {
 	}
 
 	public Trainee getTrainee() {
-		return trainee;
+		return (Trainee) trainee;
 	}
 
 	public void setTrainee(Trainee trainee) {
-		this.trainee = trainee;
+		this.trainee = (List<Trainee>) trainee;
 	}
 
 	

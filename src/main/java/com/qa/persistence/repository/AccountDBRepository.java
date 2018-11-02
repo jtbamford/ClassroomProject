@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Account;
+import com.qa.persistence.domain.Trainee;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
@@ -35,7 +36,13 @@ public class AccountDBRepository implements AccountRepository {
 		manager.persist(anAccount);
 		return "{\"message\": \"account has been sucessfully added\"}";
 	}
-
+	
+	@Transactional(REQUIRED)
+	public String createTrainee(String trainee) {
+		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
+		manager.persist(aTrainee);
+		return "{\"message\": \"account has been sucessfully added\"}";
+	}
 
 	@Transactional(REQUIRED)
 	public String deleteClassroom(Long classroomID) {

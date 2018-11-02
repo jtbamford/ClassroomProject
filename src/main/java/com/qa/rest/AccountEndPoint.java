@@ -10,8 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.qa.persistence.domain.Account;
-import com.qa.util.JSONUtil;
 import com.qa.service.business.AccountService;
+import com.qa.util.JSONUtil;
 
 @Path("/account")
 public class AccountEndPoint {
@@ -32,6 +32,13 @@ public class AccountEndPoint {
 	public String createClassroom(String account) {
 		return service.createClassroom(account);
 	}
+	
+	@Path("/createTrainee")
+	@POST
+	@Produces({ "application/json" })
+	public String createTrainee(String trainee) {
+		return service.createTrainee(trainee);
+	}
 
 	@Path("/deleteAccount/{id}")
 	@DELETE
@@ -40,12 +47,11 @@ public class AccountEndPoint {
 		return service.deleteClassroom(classroomID);
 	}
 	
-	@Path("/updateAccount/{id}/{account}")
+	@Path("/updateAccount/{id}")
 	@PUT
 	@Produces({ "application/json" })
-	public String updateAccount(@PathParam("account") String accout,@PathParam("id") Long classroomID) {
-		//Account acc=JSONUtil.getObjectForJSON(accountJSON,Account.class);
-		return updateAccount(accout, classroomID);
+	public String updateClassroom(String accout,@PathParam("id") Long classroomID) {
+		return service.updateClassroom(accout, classroomID);
 	}
 
 
