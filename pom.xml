@@ -7,13 +7,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>ClassroomProject</name>
+	<!--<name>ClassroomProject</name>
 	<url>http://maven.apache.org</url>
-
-	<properties>
+	-->
+	
+		<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.jboss.bom>10.1.0.Final</version.jboss.bom>
 		<version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
+		<version.jboss.spec.javaee.7.0>1.0.3.Final</version.jboss.spec.javaee.7.0>
 		<version.war.plugin>3.0.0</version.war.plugin>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -22,16 +23,23 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.wildfly.bom</groupId>
-				<artifactId>wildfly-javaee7-with-tools</artifactId>
-				<version>${version.jboss.bom}</version>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-7.0</artifactId>
+				<version>${version.jboss.spec.javaee.7.0}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
+
 	<dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
@@ -84,6 +92,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
+			<version>5.2.17.Final</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -114,6 +123,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.10.Final</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -121,12 +131,6 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -140,21 +144,12 @@
 		<profile>
 			<id>deploy</id>
 			<build>
-				<directory>C:\Users\Admin\ExternalApplications\wildfly-10.1.0.Final\wildfly-10.1.0.Final\standalone\deployments</directory>
+				<directory>C:\Users\Admin\Wildfly\wildfly-10.1.0.Final\standalone\deployments</directory>
 			</build>
 		</profile>
 	</profiles>
 
-	<distributionManagement>
-		<repository>
-			<id>repodeploy</id>
-			<url>http://localhost:8080/</url>
-		</repository>
-	</distributionManagement>
-
 	<build>
-		<!-- Maven will append the version to the finalName (which is the name 
-			given to the generated WAR, and hence the context root) -->
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
@@ -165,8 +160,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			<!-- The WildFly plug-in deploys your WAR to a local WildFly container -->
-			<!-- To use, run: mvn package wildfly:deploy -->
+			<!-- WildFly plug-in to deploy the WAR -->
 			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>

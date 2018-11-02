@@ -18,6 +18,10 @@ public class AccountServiceImpl implements AccountService {
 		return repo.createClassroom(accout);
 	}
 	
+	public String createTrainee(String trainee) {
+		return repo.createTrainee(trainee);
+	}
+	
 	public String deleteClassroom(Long classroomID) {
 		return repo.deleteClassroom(classroomID);
 	}

@@ -9,5 +9,6 @@ public interface AccountService {
 	String deleteClassroom(Long classroomID);
 	Account retrieveClassroom(Long classroomID);
 	String updateClassroom(String accout,Long classroomID);
+	String createTrainee(String trainee);
 
 }
