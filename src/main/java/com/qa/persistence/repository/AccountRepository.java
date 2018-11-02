@@ -10,5 +10,6 @@ public interface AccountRepository {
 	Account retrieveClassroom(Long classroomID);
 	String updateClassroom(String accout,Long classroomID);
 	String createTrainee(String trainee);
+	String deleteTrainee(Long traineeID);
 
 }

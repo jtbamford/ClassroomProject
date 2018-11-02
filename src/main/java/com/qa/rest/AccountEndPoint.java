@@ -10,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.qa.persistence.domain.Account;
+import com.qa.persistence.domain.Trainee;
 import com.qa.service.business.AccountService;
 import com.qa.util.JSONUtil;
 
@@ -45,6 +46,13 @@ public class AccountEndPoint {
 	@Produces({ "application/json" })
 	public String deleteClassroom(@PathParam("id") Long classroomID) {
 		return service.deleteClassroom(classroomID);
+	}
+	
+	@Path("/deleteTrainee/{id}")
+	@DELETE
+	@Produces({ "application/json" })
+	public String deleteTrainee(@PathParam("id") Long traineeID) {
+		return service.deleteTrainee(traineeID);
 	}
 	
 	@Path("/updateAccount/{id}")
